@@ -1,4 +1,8 @@
 {
+  "name": "genai-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "commonjs",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "axios": "^1.11.0",
