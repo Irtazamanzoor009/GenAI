@@ -3,6 +3,7 @@ const cors = require('cors');
 const pdfRoutes = require('./routes/pdfRoute');
 
 const app = express();
+app.use(express.json()); 
 app.use(cors());
 
 // Routes
