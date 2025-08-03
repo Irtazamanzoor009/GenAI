@@ -8,5 +8,9 @@ app.use(cors());
 // Routes
 app.use('/api/pdf', pdfRoutes);
 
+app.use('/', (req, res)=>{
+    res.json("Server is ready");
+})
+
 const port = 5000;
 app.listen(port, ()=> console.log(`Server running http://localhost:${port}`));
