@@ -13,4 +13,11 @@ app.use('/', (req, res)=>{
 })
 
 const port = 5000;
-app.listen(port, ()=> console.log(`Server running http://localhost:${port}`));
+// Export for Vercel
+module.exports = app;
+
+// Only listen locally (not on Vercel)
+if (require.main === module) {
+    const port = 5000;
+    app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+}
