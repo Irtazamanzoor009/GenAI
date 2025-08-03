@@ -1,4 +1,3 @@
-// /client/src/components/PDFUploader.jsx
 import axios from "axios";
 import { useState } from "react";
 import "./PDFUploader.css";
@@ -6,20 +5,25 @@ import "./PDFUploader.css";
 const PDFUploader = () => {
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState(null);
+  const [loading, setloading] = useState(false);
 
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!file) return;
+    console.log("Button clicked");
 
     const formData = new FormData();
     formData.append("pdf", file);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/pdf/", formData);
+      setloading(true);
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/pdf/`, formData);
       setResponse(res.data);
+      setloading(false);
     } catch (error) {
       console.error("Error uploading PDF:", error);
       alert("Failed to upload PDF and generate questions.");
+      setloading(false);
     }
   };
 
@@ -32,7 +36,9 @@ const PDFUploader = () => {
           accept="application/pdf"
           onChange={(e) => setFile(e.target.files[0])}
         />
-        <button type="submit">Upload and Generate</button>
+        <button  disabled={loading} type="submit">
+          {!loading ? "Upload and Generate" : "Generating..."}
+        </button>
       </form>
 
       {response && (
