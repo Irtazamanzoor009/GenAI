@@ -9,7 +9,7 @@ app.use(cors());
 app.use('/api/pdf', pdfRoutes);
 
 app.use('/', (req, res)=>{
-    res.json("Server is ready");
+    res.send("Server is ready");
 })
 
 const port = 5000;
